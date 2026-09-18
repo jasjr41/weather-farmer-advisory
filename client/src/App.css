@@ -3292,3 +3292,701 @@ body {
     }
 
 }
+/* ==========================================
+   WEATHER CHARTS
+========================================== */
+
+.weather-charts {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+.charts-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.charts-eyebrow {
+    display: inline-block;
+    margin-bottom: 8px;
+
+    color: #16a34a;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.charts-header h2 {
+    margin: 0;
+
+    color: #14532d;
+    font-size: 28px;
+}
+
+.charts-header p {
+    margin-top: 8px;
+
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+/* ==========================================
+   CHART CARD
+========================================== */
+
+.chart-card {
+    margin-bottom: 25px;
+    padding: 25px;
+
+    background: #ffffff;
+
+    border: 1px solid #dce8dc;
+    border-radius: 18px;
+
+    box-shadow: 0 8px 25px rgba(20, 83, 45, 0.07);
+
+    transition: 0.25s ease;
+}
+
+.chart-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 12px 30px rgba(20, 83, 45, 0.1);
+}
+
+
+/* ==========================================
+   CHART HEADER
+========================================== */
+
+.chart-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+}
+
+.chart-card-header h3 {
+    margin: 0;
+
+    color: #14532d;
+    font-size: 19px;
+}
+
+.chart-card-header p {
+    margin: 5px 0 0;
+
+    color: #64748b;
+    font-size: 13px;
+}
+
+
+/* ==========================================
+   CHART CONTAINER
+========================================== */
+
+.chart-container {
+    width: 100%;
+    height: 320px;
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 768px) {
+
+    .weather-charts {
+        width: 92%;
+    }
+
+    .chart-card {
+        padding: 18px;
+    }
+
+    .charts-header h2 {
+        font-size: 23px;
+    }
+
+    .chart-container {
+        height: 280px;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .chart-card-header h3 {
+        font-size: 16px;
+    }
+
+    .chart-card-header p {
+        font-size: 12px;
+    }
+
+    .chart-container {
+        height: 250px;
+    }
+
+}
+/* ==========================================
+   RECOMMENDATION CARD
+========================================== */
+
+.recommendation-card {
+    width: 90%;
+    max-width: 1200px;
+    margin: 35px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid #dce8dc;
+    box-shadow: 0 8px 25px rgba(20, 83, 45, 0.08);
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.recommendation-card .section-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.recommendation-card .section-title > span {
+    font-size: 38px;
+}
+
+.recommendation-card .section-title h2 {
+    margin: 0;
+    color: #14532d;
+    font-size: 26px;
+}
+
+.recommendation-card .section-title p {
+    margin: 5px 0 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+/* ==========================================
+   RECOMMENDATION LIST
+========================================== */
+
+.recommendation-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+
+/* ==========================================
+   RECOMMENDATION ITEM
+========================================== */
+
+.recommendation-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 18px;
+    border-radius: 14px;
+    border: 1px solid #e2e8e2;
+    background: #ffffff;
+    transition: all 0.25s ease;
+}
+
+.recommendation-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(20, 83, 45, 0.08);
+}
+
+
+/* ==========================================
+   MAIN ICON
+========================================== */
+
+.recommendation-main-icon {
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+    font-size: 21px;
+}
+
+
+/* ==========================================
+   CONTENT
+========================================== */
+
+.recommendation-content {
+    flex: 1;
+}
+
+.recommendation-content p {
+    margin: 10px 0 0;
+    color: #334155;
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+
+/* ==========================================
+   TOP SECTION
+========================================== */
+
+.recommendation-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+
+/* ==========================================
+   CATEGORY
+========================================== */
+
+.recommendation-category {
+    color: #166534;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+/* ==========================================
+   PRIORITY BADGE
+========================================== */
+
+.priority-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* ==========================================
+   HIGH PRIORITY
+========================================== */
+
+.recommendation-item.priority-high {
+    border-left: 5px solid #dc2626;
+    background: #fffafa;
+}
+
+.recommendation-main-icon {
+    background: #f1f5f9;
+}
+
+.recommendation-item.priority-high .recommendation-main-icon {
+    background: #fee2e2;
+}
+
+.priority-badge.priority-high {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+
+/* ==========================================
+   MEDIUM PRIORITY
+========================================== */
+
+.recommendation-item.priority-medium {
+    border-left: 5px solid #d97706;
+    background: #fffdf7;
+}
+
+.recommendation-item.priority-medium .recommendation-main-icon {
+    background: #fef3c7;
+}
+
+.priority-badge.priority-medium {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+
+/* ==========================================
+   LOW PRIORITY
+========================================== */
+
+.recommendation-item.priority-low {
+    border-left: 5px solid #16a34a;
+    background: #fbfffb;
+}
+
+.recommendation-item.priority-low .recommendation-main-icon {
+    background: #dcfce7;
+}
+
+.priority-badge.priority-low {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 768px) {
+
+    .recommendation-card {
+        width: 92%;
+        padding: 22px;
+    }
+
+    .recommendation-card .section-title h2 {
+        font-size: 22px;
+    }
+
+    .recommendation-card .section-title > span {
+        font-size: 32px;
+    }
+
+    .recommendation-item {
+        padding: 15px;
+    }
+
+    .recommendation-top {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .recommendation-card {
+        width: 94%;
+        padding: 18px;
+    }
+
+    .recommendation-item {
+        gap: 10px;
+        padding: 13px;
+    }
+
+    .recommendation-main-icon {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        font-size: 18px;
+    }
+
+    .recommendation-content p {
+        font-size: 13px;
+    }
+
+}
+/* ==========================================
+   FARM PROFILE PAGE
+========================================== */
+
+.farm-profile-page {
+    min-height: calc(100vh - 70px);
+    padding: 45px 20px 60px;
+    background: #f4f8f3;
+}
+
+/* Hero */
+
+.farm-profile-hero {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto 30px;
+
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.farm-profile-icon {
+    width: 65px;
+    height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #dcfce7;
+    border-radius: 18px;
+
+    font-size: 32px;
+}
+
+.farm-profile-eyebrow {
+    margin: 0 0 5px;
+
+    color: #16a34a;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.farm-profile-hero h1 {
+    margin: 0;
+
+    color: #14532d;
+    font-size: 32px;
+}
+
+.farm-profile-hero p:last-child {
+    margin: 8px 0 0;
+
+    color: #64748b;
+    font-size: 15px;
+}
+
+
+/* Main Card */
+
+.farm-profile-card {
+    width: 90%;
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 32px;
+
+    background: #ffffff;
+
+    border: 1px solid #dce8dc;
+    border-radius: 18px;
+
+    box-shadow: 0 8px 25px rgba(20, 83, 45, 0.08);
+}
+
+
+/* Form Grid */
+
+.farm-profile-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 22px;
+}
+
+.farm-form-group {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.farm-form-group label {
+    color: #334155;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.farm-form-group input,
+.farm-form-group select {
+    width: 100%;
+
+    padding: 13px 14px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: #334155;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: all 0.2s ease;
+
+    box-sizing: border-box;
+}
+
+.farm-form-group input:focus,
+.farm-form-group select:focus {
+    border-color: #16a34a;
+
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+}
+
+
+/* Full Width Field */
+
+.farm-form-full {
+    grid-column: 1 / -1;
+}
+
+
+/* Save Button */
+
+.farm-save-button {
+    display: block;
+
+    width: 100%;
+
+    margin-top: 28px;
+
+    padding: 14px 20px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #14532d;
+    color: #ffffff;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+.farm-save-button:hover {
+    background: #166534;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 6px 15px rgba(20, 83, 45, 0.2);
+}
+
+.farm-save-button:disabled {
+    background: #94a3b8;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+
+/* Success Message */
+
+.farm-success-message {
+    margin-top: 22px;
+
+    padding: 13px 16px;
+
+    border-radius: 10px;
+
+    background: #dcfce7;
+
+    border: 1px solid #bbf7d0;
+
+    color: #166534;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* Error Message */
+
+.farm-error-message {
+    margin-top: 22px;
+
+    padding: 13px 16px;
+
+    border-radius: 10px;
+
+    background: #fee2e2;
+
+    border: 1px solid #fecaca;
+
+    color: #b91c1c;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 768px) {
+
+    .farm-profile-page {
+        padding: 30px 15px 50px;
+    }
+
+    .farm-profile-hero {
+        width: 94%;
+    }
+
+    .farm-profile-hero h1 {
+        font-size: 26px;
+    }
+
+    .farm-profile-card {
+        width: 94%;
+        padding: 24px;
+    }
+
+    .farm-profile-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .farm-form-full {
+        grid-column: auto;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .farm-profile-hero {
+        align-items: flex-start;
+    }
+
+    .farm-profile-icon {
+        width: 52px;
+        height: 52px;
+
+        min-width: 52px;
+
+        font-size: 25px;
+    }
+
+    .farm-profile-hero h1 {
+        font-size: 22px;
+    }
+
+    .farm-profile-hero p:last-child {
+        font-size: 13px;
+    }
+
+    .farm-profile-card {
+        width: 94%;
+        padding: 18px;
+    }
+
+}

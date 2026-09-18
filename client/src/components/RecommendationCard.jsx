@@ -1,175 +1,122 @@
 function RecommendationCard({ recommendations }) {
-  if (!recommendations || recommendations.length === 0) {
-    return null;
-  }
-
-  const categories = {
-    irrigation: {
-      title: "Irrigation",
-      icon: "💧",
-      items: []
-    },
-
-    rainfall: {
-      title: "Rainfall",
-      icon: "🌧️",
-      items: []
-    },
-
-    spraying: {
-      title: "Spraying",
-      icon: "🧪",
-      items: []
-    },
-
-    weather: {
-      title: "Weather & Temperature",
-      icon: "🌡️",
-      items: []
-    },
-
-    growth: {
-      title: "Growth Stage",
-      icon: "🌱",
-      items: []
-    },
-
-    protection: {
-      title: "Crop Protection",
-      icon: "🛡️",
-      items: []
-    },
-
-    general: {
-      title: "General Advice",
-      icon: "🌾",
-      items: []
+    if (!recommendations || recommendations.length === 0) {
+        return null;
     }
-  };
 
-  // Categorize recommendations
-  recommendations.forEach((recommendation) => {
-    const text = recommendation.toLowerCase();
+    const priorityStyles = {
+        High: {
+            className: "priority-high",
+            label: "High Priority",
+            icon: "🚨"
+        },
 
-    if (
-      text.includes("irrigation") ||
-      text.includes("water") ||
-      text.includes("soil moisture")
-    ) {
-      categories.irrigation.items.push(recommendation);
-    } 
-    
-    else if (
-      text.includes("rainfall") ||
-      text.includes("rain") ||
-      text.includes("rainy")
-    ) {
-      categories.rainfall.items.push(recommendation);
-    } 
-    
-    else if (
-      text.includes("spraying") ||
-      text.includes("spray") ||
-      text.includes("pesticide") ||
-      text.includes("foliar")
-    ) {
-      categories.spraying.items.push(recommendation);
-    } 
-    
-    else if (
-      text.includes("temperature") ||
-      text.includes("hot") ||
-      text.includes("cold") ||
-      text.includes("heat")
-    ) {
-      categories.weather.items.push(recommendation);
-    } 
-    
-    else if (
-      text.includes("sowing") ||
-      text.includes("flowering") ||
-      text.includes("vegetative") ||
-      text.includes("maturity") ||
-      text.includes("harvesting") ||
-      text.includes("growth stage")
-    ) {
-      categories.growth.items.push(recommendation);
-    } 
-    
-    else if (
-      text.includes("pest") ||
-      text.includes("disease") ||
-      text.includes("crop protection")
-    ) {
-      categories.protection.items.push(recommendation);
-    } 
-    
-    else {
-      categories.general.items.push(recommendation);
-    }
-  });
+        Medium: {
+            className: "priority-medium",
+            label: "Medium Priority",
+            icon: "⚠️"
+        },
 
-  return (
-    <section className="recommendation-card">
+        Low: {
+            className: "priority-low",
+            label: "Low Priority",
+            icon: "💡"
+        }
+    };
 
-      <div className="section-title">
-        <span>💡</span>
 
-        <div>
-          <h2>Farming Recommendations</h2>
-          <p>Personalized advice based on crop and weather conditions</p>
-        </div>
-      </div>
+    const categoryIcons = {
+        Weather: "🌡️",
+        Irrigation: "💧",
+        Fertilizer: "🧪",
+        "Crop Protection": "🛡️",
+        "Growth Stage": "🌱",
+        Soil: "🌍",
+        General: "🌾"
+    };
 
-      <div className="recommendation-categories">
 
-        {Object.values(categories).map((category) => {
+    return (
+        <section className="recommendation-card">
 
-          if (category.items.length === 0) {
-            return null;
-          }
+            {/* Header */}
+            <div className="section-title">
 
-          return (
-            <div
-              className="recommendation-category"
-              key={category.title}
-            >
+                <span>💡</span>
 
-              <div className="category-header">
-                <span className="category-icon">
-                  {category.icon}
-                </span>
+                <div>
+                    <h2>Farming Recommendations</h2>
 
-                <h3>{category.title}</h3>
-              </div>
-
-              <div className="category-list">
-
-                {category.items.map((recommendation, index) => (
-                  <div
-                    className="recommendation-item"
-                    key={index}
-                  >
-
-                    <span className="recommendation-icon">
-                      ✓
-                    </span>
-
-                    <p>{recommendation}</p>
-
-                  </div>
-                ))}
-
-              </div>
+                    <p>
+                        Personalized advice based on crop and weather conditions
+                    </p>
+                </div>
 
             </div>
-          );
-        })}
 
-      </div>
 
-    </section>
-  );
+            {/* Recommendations */}
+            <div className="recommendation-list">
+
+                {recommendations.map((recommendation) => {
+
+                    const priority =
+                        priorityStyles[recommendation.priority] ||
+                        priorityStyles.Low;
+
+
+                    const categoryIcon =
+                        categoryIcons[recommendation.category] ||
+                        "🌾";
+
+
+                    return (
+                        <div
+                            className={`recommendation-item ${priority.className}`}
+                            key={recommendation.id}
+                        >
+
+                            {/* Icon */}
+                            <div className="recommendation-main-icon">
+                                {recommendation.icon || categoryIcon}
+                            </div>
+
+
+                            {/* Content */}
+                            <div className="recommendation-content">
+
+                                <div className="recommendation-top">
+
+                                    <span className="recommendation-category">
+                                        {categoryIcon}{" "}
+                                        {recommendation.category || "General"}
+                                    </span>
+
+
+                                    <span
+                                        className={`priority-badge ${priority.className}`}
+                                    >
+                                        {priority.icon}{" "}
+                                        {priority.label}
+                                    </span>
+
+                                </div>
+
+
+                                <p>
+                                    {recommendation.text}
+                                </p>
+
+                            </div>
+
+                        </div>
+                    );
+
+                })}
+
+            </div>
+
+        </section>
+    );
 }
 
 export default RecommendationCard;

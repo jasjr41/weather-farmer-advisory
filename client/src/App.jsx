@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -11,7 +11,9 @@ import ForecastCard from "./components/ForecastCard";
 import CropInfoCard from "./components/CropInfoCard";
 import StatsCard from "./components/StatsCard";
 import Loading from "./components/Loading";
+import WeatherCharts from "./components/WeatherCharts";
 
+import FarmProfile from "./pages/FarmProfile";
 import FertilizerAdvisor from "./pages/FertilizerAdvisor";
 import PestDiseaseAdvisor from "./pages/PestDiseaseAdvisor";
 
@@ -288,6 +290,15 @@ function Home({
 
 
                     {/* ==========================================
+                        WEATHER CHARTS
+                    ========================================== */}
+
+                    <WeatherCharts
+                        forecast={weatherData?.forecast}
+                    />
+
+
+                    {/* ==========================================
                         RECOMMENDATIONS
                     ========================================== */}
 
@@ -350,7 +361,8 @@ function App() {
 
     const [crop, setCrop] = useState("wheat");
 
-    const [weatherData, setWeatherData] = useState(null);
+    const [weatherData, setWeatherData] =
+        useState(null);
 
     const [growthStage, setGrowthStage] =
         useState("vegetative");
@@ -369,12 +381,159 @@ function App() {
 
 
     // ==========================================
+    // LOAD SAVED FARM + WEATHER
+    // ==========================================
+
+    useEffect(() => {
+
+        const loadFarmAndWeather = async () => {
+
+            try {
+
+                // ==========================================
+                // GET SAVED FARMS
+                // ==========================================
+
+                const farmResponse = await axios.get(
+                    "http://localhost:5000/api/farms"
+                );
+
+                const farms =
+                    farmResponse.data.data;
+
+
+                // ==========================================
+                // CHECK IF FARM EXISTS
+                // ==========================================
+
+                if (
+                    !farms ||
+                    farms.length === 0
+                ) {
+
+                    return;
+                }
+
+
+                // ==========================================
+                // GET LATEST FARM
+                // ==========================================
+
+                const farm = farms[0];
+
+
+                // ==========================================
+                // GET FARM VALUES
+                // ==========================================
+
+                const savedCity =
+                    farm.location || "";
+
+                const savedCrop =
+                    farm.crop?.toLowerCase() ||
+                    "wheat";
+
+                const savedSoil =
+                    farm.soilType ||
+                    "loamy";
+
+                const savedGrowthStage =
+                    farm.growthStage ||
+                    "vegetative";
+
+                const savedActivity =
+                    farm.farmingActivity ||
+                    "general";
+
+
+                // ==========================================
+                // UPDATE HOME FORM
+                // ==========================================
+
+                setCity(savedCity);
+
+                setCrop(savedCrop);
+
+                setSoilType(savedSoil);
+
+                setGrowthStage(
+                    savedGrowthStage
+                );
+
+                setFarmingActivity(
+                    savedActivity
+                );
+
+
+                // ==========================================
+                // AUTOMATICALLY FETCH WEATHER
+                // ==========================================
+
+                if (savedCity.trim()) {
+
+                    setLoading(true);
+
+                    setError("");
+
+
+                    const weatherResponse =
+                        await axios.get(
+
+                            `http://localhost:5000/api/weather?city=${encodeURIComponent(
+                                savedCity
+                            )}&crop=${savedCrop}&growthStage=${savedGrowthStage}&soilType=${savedSoil}&farmingActivity=${savedActivity}`
+
+                        );
+
+
+                    // ==========================================
+                    // SAVE WEATHER DATA
+                    // ==========================================
+
+                    setWeatherData(
+                        weatherResponse.data.data
+                    );
+
+                }
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Unable to load farm dashboard:",
+                    error
+                );
+
+                setError(
+                    "Unable to load saved farm weather."
+                );
+
+            }
+
+            finally {
+
+                setLoading(false);
+
+            }
+
+        };
+
+
+        loadFarmAndWeather();
+
+    }, []);
+
+
+    // ==========================================
     // GET WEATHER BY CITY
     // ==========================================
 
     const getWeather = async () => {
 
-        // Validate city
+        // ==========================================
+        // VALIDATE CITY
+        // ==========================================
 
         if (!city.trim()) {
 
@@ -395,7 +554,9 @@ function App() {
             setError("");
 
 
-            // API request
+            // ==========================================
+            // API REQUEST
+            // ==========================================
 
             const response = await axios.get(
 
@@ -406,7 +567,9 @@ function App() {
             );
 
 
-            // Save API data
+            // ==========================================
+            // SAVE API DATA
+            // ==========================================
 
             setWeatherData(
                 response.data.data
@@ -422,7 +585,9 @@ function App() {
             setWeatherData(null);
 
 
-            // Server responded with error
+            // ==========================================
+            // SERVER RESPONDED WITH ERROR
+            // ==========================================
 
             if (error.response) {
 
@@ -467,7 +632,9 @@ function App() {
             }
 
 
-            // Request was made but no response
+            // ==========================================
+            // REQUEST MADE BUT NO RESPONSE
+            // ==========================================
 
             else if (error.request) {
 
@@ -478,7 +645,9 @@ function App() {
             }
 
 
-            // Something else happened
+            // ==========================================
+            // OTHER ERROR
+            // ==========================================
 
             else {
 
@@ -506,7 +675,9 @@ function App() {
 
     const getLocationWeather = () => {
 
-        // Check browser support
+        // ==========================================
+        // CHECK BROWSER SUPPORT
+        // ==========================================
 
         if (!navigator.geolocation) {
 
@@ -523,7 +694,9 @@ function App() {
         setError("");
 
 
-        // Get current location
+        // ==========================================
+        // GET CURRENT LOCATION
+        // ==========================================
 
         navigator.geolocation.getCurrentPosition(
 
@@ -538,7 +711,9 @@ function App() {
                         position.coords.longitude;
 
 
-                    // API request
+                    // ==========================================
+                    // API REQUEST
+                    // ==========================================
 
                     const response =
                         await axios.get(
@@ -548,14 +723,18 @@ function App() {
                         );
 
 
-                    // Save weather data
+                    // ==========================================
+                    // SAVE WEATHER DATA
+                    // ==========================================
 
                     setWeatherData(
                         response.data.data
                     );
 
 
-                    // Update city name
+                    // ==========================================
+                    // UPDATE CITY NAME
+                    // ==========================================
 
                     setCity(
                         response.data.data.weather.city
@@ -586,7 +765,9 @@ function App() {
             },
 
 
-            // Location error
+            // ==========================================
+            // LOCATION ERROR
+            // ==========================================
 
             (error) => {
 
@@ -626,7 +807,9 @@ function App() {
 
         <BrowserRouter>
 
-            {/* Navbar */}
+            {/* ==========================================
+                NAVBAR
+            ========================================== */}
 
             <Navbar />
 
@@ -655,7 +838,9 @@ function App() {
                             }
 
                             soilType={soilType}
-                            setSoilType={setSoilType}
+                            setSoilType={
+                                setSoilType
+                            }
 
                             farmingActivity={
                                 farmingActivity
@@ -707,6 +892,18 @@ function App() {
                     path="/pest-disease-advisor"
                     element={
                         <PestDiseaseAdvisor />
+                    }
+                />
+
+
+                {/* ==========================================
+                    FARM PROFILE
+                ========================================== */}
+
+                <Route
+                    path="/farm-profile"
+                    element={
+                        <FarmProfile />
                     }
                 />
 

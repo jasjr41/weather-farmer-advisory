@@ -4,12 +4,10 @@ function Navbar() {
     return (
         <nav className="navbar">
 
-            {/* Logo */}
             <div className="navbar-logo">
                 🌾 Smart Farming Advisor
             </div>
 
-            {/* Navigation Links */}
             <div className="navbar-links">
 
                 <Link to="/">
@@ -18,6 +16,10 @@ function Navbar() {
 
                 <Link to="/">
                     🌦️ Weather
+                </Link>
+
+                <Link to="/farm-profile">
+                    👨‍🌾 Farm Profile
                 </Link>
 
                 <Link to="/fertilizer-advisor">

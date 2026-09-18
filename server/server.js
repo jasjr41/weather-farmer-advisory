@@ -5,6 +5,7 @@ const weatherRoutes = require("./routes/weatherRoutes");
 const cropRoutes = require("./routes/cropRoutes");
 const fertilizerRoutes = require("./routes/fertilizerRoutes");
 const pestDiseaseRoutes = require("./routes/pestDiseaseRoutes");
+const farmRoutes = require("./routes/farmRoutes");
 
 
 const connectDB = require("./config/db.js");
@@ -22,6 +23,7 @@ app.use("/api/fertilizers", fertilizerRoutes);
 app.use("/api/deficiencies", deficiencyRoutes);
 app.use("/api/pest-diseases", pestDiseaseRoutes);
 app.use("/api/pest-diseases", pestDiseaseRoutes);
+app.use("/api/farms", farmRoutes);
 
 // Test route
 app.get("/", (req, res) => {
